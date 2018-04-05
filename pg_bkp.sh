@@ -17,7 +17,7 @@ for (( i=0; i<${#db[*]}; i++ ))
 do
     dbname=${db[$i]}
     fname=${dbname}__${datehour}.fullbkp
-    PGPASSWORD=qbdhnLs4 nice pg_dump -U lod -Ox " ${exclude} " -h 10.4.126.28 -d ${dbname} > ${dumpdir}/last/${fname}.part 2> ${dumpdir}/${fname}.error
+    PGPASSWORD=password nice pg_dump -U lod -Ox " ${exclude} " -h 10.4.126.28 -d ${dbname} > ${dumpdir}/last/${fname}.part 2> ${dumpdir}/${fname}.error
     if [ -s ${dumpdir}/${fname}.error ]; then
         rm ${dumpdir}/last/${fname}.part
         echo "ERROR with dumping ${dbname}:"
