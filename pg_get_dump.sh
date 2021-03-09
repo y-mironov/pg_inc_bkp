@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# TODO сделать опцию - не удалять промежуточные восстановления - например: для быстрого развёртывания пред. дельты
+# TODO make option: do not remove middle dumps
 
 if [ -z $1 ]; then
     echo "usage: $(basename $0) [delta file name]"
