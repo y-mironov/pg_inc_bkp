@@ -4,7 +4,7 @@
 bkpdir=/mnt/backup/dbs            # backup root
 db=(mpru_lod_db mo_lod_db)        # databases for backup list
 exclude="-T mamonsu_*"            # exclude tables "-T table1 -T table2 ... -T tableN"
-dbhost=10.4.126.28
+dbhost=127.0.0.1
 dbpass="something_here"
 
 # MAIN
