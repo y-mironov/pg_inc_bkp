@@ -4,6 +4,8 @@
 bkpdir=/mnt/backup/dbs            # backup root
 db=(mpru_lod_db mo_lod_db)        # databases for backup list
 exclude="-T mamonsu_*"            # exclude tables "-T table1 -T table2 ... -T tableN"
+dbhost=10.4.126.28
+dbpass="something_here"
 
 # MAIN
 date
@@ -17,7 +19,7 @@ for (( i=0; i<${#db[*]}; i++ ))
 do
     dbname=${db[$i]}
     fname=${dbname}__${datehour}.fullbkp
-    PGPASSWORD=password nice pg_dump -U lod -Ox " ${exclude} " -h 10.4.126.28 -d ${dbname} > ${dumpdir}/last/${fname}.part 2> ${dumpdir}/${fname}.error
+    PGPASSWORD=${dbpass} nice pg_dump -U lod -Ox " ${exclude} " -h ${dbhost} -d ${dbname} > ${dumpdir}/last/${fname}.part 2> ${dumpdir}/${fname}.error
     if [ -s ${dumpdir}/${fname}.error ]; then
         rm ${dumpdir}/last/${fname}.part
         echo "ERROR with dumping ${dbname}:"
