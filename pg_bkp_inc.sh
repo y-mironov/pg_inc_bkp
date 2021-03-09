@@ -11,6 +11,7 @@ mkdir -p ${bkpdir}/${date}/last
 dumpdir=${bkpdir}/${date}         # directory name for today dumps
 datehour=`date +%Y-%m-%d__%H`     # file name for current dumps
 db_host=127.0.0.1
+db_pass=password
 
 for (( i=0; i<${#dbs[*]}; i++ ))
 do
@@ -31,7 +32,7 @@ do
     rm ${dumpdir}/${fname}.error        # 2> /dev/null
 
     # dumping
-    PGPASSWORD=qbdhnLs4 nice pg_dump -U lod -Ox -T mamonsu_* -h ${db_host} -d ${dbname} > ${dumpdir}/last/${fname}.part 2> ${dumpdir}/${fname}.error
+    PGPASSWORD=${db_pass} nice pg_dump -U lod -Ox -T mamonsu_* -h ${db_host} -d ${dbname} > ${dumpdir}/last/${fname}.part 2> ${dumpdir}/${fname}.error
     if [ -s ${dumpdir}/${fname}.error ]; then
         rm ${dumpdir}/last/${fname}.part
         echo "ERROR with dumping ${dbname}: "
